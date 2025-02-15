@@ -110,6 +110,10 @@ Development Process
      * Updated accent color from bright yellow (#f1c40f) to royal gold (#d4af37)
      * Added golden glow effects to title and interactive elements
      * Improved contrast for better visibility
+     * Separated color variables into dedicated colors.css:
+       - Organized colors by purpose (main, effects, gradients)
+       - Improved maintainability and reusability
+       - Centralized theme management
    
    - Layout and Spacing:
      * Reduced container width from 800px to 750px
@@ -144,6 +148,25 @@ Development Process
        - Better contrast between card and images
        - More cohesive integration with theme
        - Enhanced visual hierarchy
+   
+   - CSS Organization and Optimization:
+     * Split CSS into modular files:
+       - main.css for layout and components
+       - colors.css for theme variables
+     * Improved code maintainability:
+       - Removed redundant declarations
+       - Centralized color management
+       - Better organized gradients and effects
+     * Enhanced development workflow:
+       - Easier theme modifications
+       - Better separation of concerns
+       - Simplified debugging and updates
+     * Enhanced user experience:
+       - Added universal text/image selection prevention:
+         * From: Users could select text and images
+         * To: No text or images can be selected
+         * Why: Prevents accidental selection during gameplay,
+               makes the game feel more like a native app
    
    - Mobile Responsiveness:
      * Improved text scaling for smaller screens

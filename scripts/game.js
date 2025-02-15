@@ -1,8 +1,15 @@
 /**
  * Memory of the Ring - A fantasy-themed memory card game
  * 
- * This game was developed with assistance from AI (Claude) to create
- * an engaging memory game experience with a fantasy theme.
+ * AI Assistance Documentation:
+ * This game was developed with the help of AI in several key areas:
+ * 1. Architecture: AI helped design the class structure and separation of concerns
+ * 2. Optimization: AI suggested performance improvements like DOM caching and event delegation
+ * 3. Animation: AI provided guidance on efficient CSS transforms and hardware acceleration
+ * 4. Testing: AI assisted in identifying edge cases and potential bugs
+ * 
+ * All AI suggestions were manually reviewed and implemented with human oversight.
+ * The game's creative direction and final implementation decisions were made by the developer.
  * 
  * The game features:
  * - 16 cards (8 pairs) with fantasy character images
@@ -68,6 +75,12 @@ class Card {
     }
 }
 
+/**
+ * Manages the game logic and flow
+ * 
+ * AI contribution: Helped optimize the game loop and state management,
+ * particularly in handling card flips and match checking.
+ */
 class MemoryGame {
     /**
      * Initializes a new instance of the Memory Game
@@ -149,8 +162,9 @@ class MemoryGame {
 
     /**
      * Handles card flip logic
-     * Starts timer on first flip and checks for matches
-     * @param {number} index - The index of the clicked card
+     * 
+     * AI contribution: Suggested using CSS transforms for better performance
+     * and implementing proper state checks to prevent invalid moves.
      */
     flipCard(index) {
         // Start timer on first card flip
@@ -179,7 +193,9 @@ class MemoryGame {
 
     /**
      * Checks if two flipped cards match
-     * Updates game state and handles card visibility
+     * 
+     * AI contribution: Helped implement proper timing for card flips
+     * and suggested using async/await for better animation control.
      */
     checkMatch() {
         const [firstCard, secondCard] = this.flippedCards;
@@ -211,8 +227,10 @@ class MemoryGame {
     }
 
     /**
-     * Starts the game timer
-     * Updates display every second
+     * Manages the game timer
+     * 
+     * AI contribution: Suggested using setInterval with proper cleanup
+     * to prevent memory leaks.
      */
     startTimer() {
         this.timer = setInterval(() => {

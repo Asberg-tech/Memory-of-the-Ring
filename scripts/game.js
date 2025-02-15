@@ -10,10 +10,55 @@
  * - Move counter and timer
  * - Responsive design
  * 
+ * Note: Initially attempted to break out the Card class into a separate module,
+ * but reverted back to a single file to support direct file system browsing
+ * without requiring a web server (which would be needed for ES6 modules).
+ * 
  * @author Your Name
  * @version 1.0.0
  * @created 2024
  */
+
+/**
+ * Represents a single card in the memory game
+ */
+class Card {
+    /**
+     * Creates a new Card instance
+     * @param {number} id - Unique identifier for matching pairs
+     * @param {string} imagePath - Path to the card's image
+     * @param {string} name - Name of the character/item
+     */
+    constructor(id, imagePath, name) {
+        this.id = id;
+        this.imagePath = imagePath;
+        this.name = name;
+        this.isFlipped = false;
+        this.isMatched = false;
+    }
+
+    /**
+     * Creates the DOM element for the card
+     * @param {number} index - Position in the game board
+     * @param {Function} flipCallback - Function to call when card is clicked
+     * @returns {HTMLElement} The card's DOM element
+     */
+    createElement(index, flipCallback) {
+        const element = document.createElement('div');
+        element.classList.add('card');
+        element.dataset.index = index;
+
+        element.innerHTML = `
+            <div class="card-front">
+                <img src="${this.imagePath}" alt="${this.name}">
+            </div>
+            <div class="card-back"></div>
+        `;
+
+        element.addEventListener('click', () => flipCallback(index));
+        return element;
+    }
+}
 
 class MemoryGame {
     /**
@@ -47,18 +92,18 @@ class MemoryGame {
     initializeGame() {
         // Define card data with image paths
         const cardData = [
-            { id: 1, imagePath: '../images/frodo.png' },
-            { id: 2, imagePath: '../images/gandalf.png' },
-            { id: 3, imagePath: '../images/aragorn.png' },
-            { id: 4, imagePath: '../images/legolas.png' },
-            { id: 5, imagePath: '../images/sauron.png' },
-            { id: 6, imagePath: '../images/gollum.png' },
-            { id: 7, imagePath: '../images/ring.png' },
-            { id: 8, imagePath: '../images/gimli.png' }
+            new Card(1, '../images/frodo.png', 'Frodo'),
+            new Card(2, '../images/gandalf.png', 'Gandalf'),
+            new Card(3, '../images/aragorn.png', 'Aragorn'),
+            new Card(4, '../images/legolas.png', 'Legolas'),
+            new Card(5, '../images/sauron.png', 'Sauron'),
+            new Card(6, '../images/gollum.png', 'Gollum'),
+            new Card(7, '../images/ring.png', 'The Ring'),
+            new Card(8, '../images/gimli.png', 'Gimli')
         ];
 
         // Create pairs of cards and shuffle them
-        this.cards = [...cardData, ...cardData];
+        this.cards = [...cardData, ...cardData.map(card => new Card(card.id, card.imagePath, card.name))];
         this.shuffleCards();
         this.renderCards();
     }
@@ -81,20 +126,7 @@ class MemoryGame {
     renderCards() {
         this.gameBoard.innerHTML = '';
         this.cards.forEach((card, index) => {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('card');
-            cardElement.dataset.index = index;
-
-            // Create card HTML structure
-            cardElement.innerHTML = `
-                <div class="card-front">
-                    <img src="${card.imagePath}" alt="card front">
-                </div>
-                <div class="card-back"></div>
-            `;
-
-            // Add click handler
-            cardElement.addEventListener('click', () => this.flipCard(index));
+            const cardElement = card.createElement(index, (idx) => this.flipCard(idx));
             this.gameBoard.appendChild(cardElement);
         });
     }
@@ -111,13 +143,15 @@ class MemoryGame {
             this.gameStarted = true;
         }
 
-        const card = this.gameBoard.children[index];
+        const card = this.cards[index];
+        const cardElement = this.gameBoard.children[index];
 
         // Prevent flipping if card is already flipped or two cards are showing
-        if (card.classList.contains('flipped') || this.flippedCards.length >= 2) return;
+        if (cardElement.classList.contains('flipped') || this.flippedCards.length >= 2 || card.isMatched) return;
 
-        card.classList.add('flipped');
-        this.flippedCards.push({ index, id: this.cards[index].id });
+        card.isFlipped = true;
+        cardElement.classList.add('flipped');
+        this.flippedCards.push({ index, card });
 
         // Check for match when two cards are flipped
         if (this.flippedCards.length === 2) {
@@ -133,9 +167,11 @@ class MemoryGame {
      */
     checkMatch() {
         const [firstCard, secondCard] = this.flippedCards;
-        const match = firstCard.id === secondCard.id;
+        const match = firstCard.card.id === secondCard.card.id;
 
         if (match) {
+            firstCard.card.isMatched = true;
+            secondCard.card.isMatched = true;
             this.matchedPairs++;
             this.flippedCards = [];
 
@@ -149,6 +185,8 @@ class MemoryGame {
                 const firstCardElement = this.gameBoard.children[firstCard.index];
                 const secondCardElement = this.gameBoard.children[secondCard.index];
 
+                firstCard.card.isFlipped = false;
+                secondCard.card.isFlipped = false;
                 firstCardElement.classList.remove('flipped');
                 secondCardElement.classList.remove('flipped');
                 this.flippedCards = [];

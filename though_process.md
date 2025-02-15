@@ -45,7 +45,10 @@ Development Process
    - Created smooth card flip animations using CSS transforms
    - Added media queries for mobile responsiveness
    - Enhanced visual atmosphere:
-     * Themed background image covering the entire viewport
+     * Themed background image with optimized scaling
+     * Semi-transparent dark backdrop for game container
+     * Elegant text shadows for better readability
+     * Sophisticated button styling with hover effects
      * Fixed background attachment for smooth scrolling
      * Proper image scaling and positioning for all screen sizes
    - Implemented custom card design:
@@ -60,7 +63,9 @@ Development Process
      * Flexbox for header elements
      * CSS Variables for theming
      * 3D transforms for card flipping
-     * Box-shadow for depth
+     * Box-shadow for depth and layering
+     * Text-shadow for readability
+     * RGBA colors for transparency
      * Mobile-first responsive design
      * Background image handling
      * Fixed background attachments

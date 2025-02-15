@@ -19,16 +19,16 @@ class MemoryGame {
     }
 
     initializeGame() {
-        // Card data - we'll need to add image paths later
+        // Card data with image paths
         const cardData = [
-            { id: 1, imagePath: '' },
-            { id: 2, imagePath: '' },
-            { id: 3, imagePath: '' },
-            { id: 4, imagePath: '' },
-            { id: 5, imagePath: '' },
-            { id: 6, imagePath: '' },
-            { id: 7, imagePath: '' },
-            { id: 8, imagePath: '' }
+            { id: 1, imagePath: '../images/frodo.png' },
+            { id: 2, imagePath: '../images/gandalf.png' },
+            { id: 3, imagePath: '../images/aragorn.png' },
+            { id: 4, imagePath: '../images/legolas.png' },
+            { id: 5, imagePath: '../images/sauron.png' },
+            { id: 6, imagePath: '../images/gollum.png' },
+            { id: 7, imagePath: '../images/ring.png' },
+            { id: 8, imagePath: '../images/gimli.png' }
         ];
 
         // Double the cards to create pairs

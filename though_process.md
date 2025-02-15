@@ -67,8 +67,19 @@ Development Process
      * Arrow functions
      * DOM manipulation
 
+5. Image Implementation
+   - Added character images to the game:
+     * Main characters: Frodo, Gandalf, Aragorn, Legolas, Gimli
+     * Antagonists: Sauron, Gollum
+     * Key items: The Ring
+   - Integrated images into the card system:
+     * Updated card data structure with image paths
+     * Ensured proper relative path handling
+     * Maintained theme consistency across all cards
+   - Images are loaded dynamically when cards are created
+   - Card back design provides contrast to character images
+
 Next Steps
-- Add character images to the cards
 - Implement additional game features:
   * High score tracking
   * Difficulty levels

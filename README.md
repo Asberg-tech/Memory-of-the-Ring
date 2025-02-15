@@ -62,12 +62,28 @@ The game is built using vanilla JavaScript with an object-oriented approach, fea
 
 No build process or dependencies required - simply clone and run!
 
+## Contributing
+
+Contributions are welcome! If you'd like to improve the game, please:
+
+1. Fork the repository
+2. Create a new branch for your feature
+3. Submit a pull request with a clear description of your changes
+
+Please ensure your code follows the existing style and includes appropriate documentation.
+
 ## Credits
 
 - Game Development: Niklas Åsberg
-- Character Artwork: Generated using DALL·E 3
-- Documentation: Assisted by Claude AI
+- Artwork: AI-generated images
+- Documentation and Testing: Assisted by AI tools
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the MIT License. You are free to use, modify, and distribute this code, provided you include the original license and attribution.
+
+Copyright (c) 2024 Niklas Åsberg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.

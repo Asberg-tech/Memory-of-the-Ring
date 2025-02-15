@@ -1,3 +1,27 @@
+/**
+ * Memory of the Ring - Main Stylesheet
+ * 
+ * This stylesheet contains all the core styling for the memory game, including:
+ * - Layout and positioning using CSS Grid and Flexbox
+ * - Card animations and transitions
+ * - Responsive design breakpoints
+ * - Game interface styling
+ * - Victory modal design
+ * 
+ * AI Assistance Documentation:
+ * This stylesheet was developed with AI assistance in several areas:
+ * 1. Animation optimization (hardware acceleration, transitions)
+ * 2. Responsive design breakpoints and mobile adaptations
+ * 3. Performance improvements for transforms and transitions
+ * 4. Accessibility considerations for text contrast and readability
+ * 
+ * All AI suggestions were manually reviewed and implemented with human oversight.
+ * The visual design decisions and final styling choices were made by the developer.
+ * 
+ * Note: Color variables are imported from colors.css for better maintainability
+ * and theme consistency across the application.
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Quicksand:wght@400;500&display=swap');
 @import 'colors.css';
 

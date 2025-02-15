@@ -162,6 +162,75 @@ h1 {
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
 }
 
+.victory-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.victory-modal.show {
+    display: flex;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.victory-content {
+    background-color: var(--overlay-color);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.victory-image {
+    max-width: 200px;
+    margin-bottom: 1.5rem;
+}
+
+.victory-title {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.victory-text {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+#play-again-button {
+    background-color: var(--accent-color);
+    color: #1a1a1a;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#play-again-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-hover-shadow);
+    background-color: #e5c158;
+}
+
 @media (max-width: 600px) {
     .game-board {
         grid-template-columns: repeat(3, 1fr);

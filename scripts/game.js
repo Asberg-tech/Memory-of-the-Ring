@@ -88,9 +88,17 @@ class MemoryGame {
         this.movesCount = document.getElementById('moves-count');
         this.timeElement = document.getElementById('time');
         this.resetButton = document.getElementById('reset-button');
+        this.victoryModal = document.getElementById('victory-modal');
+        this.finalMoves = document.getElementById('final-moves');
+        this.finalTime = document.getElementById('final-time');
+        this.playAgainButton = document.getElementById('play-again-button');
 
         // Bind event listeners
         this.resetButton.addEventListener('click', () => this.resetGame());
+        this.playAgainButton.addEventListener('click', () => {
+            this.victoryModal.classList.remove('show');
+            this.resetGame();
+        });
     }
 
     /**
@@ -216,13 +224,22 @@ class MemoryGame {
     }
 
     /**
+     * Shows the victory screen with game statistics
+     */
+    showVictoryScreen() {
+        this.finalMoves.textContent = this.moves;
+        this.finalTime.textContent = this.timeElement.textContent;
+        this.victoryModal.classList.add('show');
+    }
+
+    /**
      * Handles game completion
-     * Stops timer and shows completion message
+     * Stops timer and shows victory screen
      */
     endGame() {
         clearInterval(this.timer);
         setTimeout(() => {
-            alert(`Congratulations! You won in ${this.moves} moves and ${this.seconds} seconds!`);
+            this.showVictoryScreen();
         }, 500);
     }
 

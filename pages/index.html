@@ -22,6 +22,16 @@
         <div class="game-board">
             <!-- Cards will be dynamically inserted here -->
         </div>
+
+        <div class="victory-modal" id="victory-modal">
+            <div class="victory-content">
+                <img src="../images/congratulation.png" alt="Victory" class="victory-image">
+                <h2 class="victory-title">Congratulations</h2>
+                <p class="victory-text">You won in <span id="final-moves">0</span> moves and <span
+                        id="final-time">00:00</span>!</p>
+                <button id="play-again-button">Play Again</button>
+            </div>
+        </div>
     </div>
 
     <script src="../scripts/game.js"></script>

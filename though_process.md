@@ -167,6 +167,21 @@ Development Process
          * To: No text or images can be selected
          * Why: Prevents accidental selection during gameplay,
                makes the game feel more like a native app
+
+   - Code Documentation and Attribution:
+     * Added comprehensive JSDoc documentation:
+       - File-level documentation with game features
+       - Class and method documentation
+       - Parameter descriptions
+       - Clear code organization
+     * Improved code readability:
+       - Added strategic comments for complex logic
+       - Better section organization
+       - Clearer variable naming
+     * Added AI attribution:
+       - Acknowledged AI assistance in development
+       - Maintained transparency about tools used
+       - Professional documentation standards
    
    - Mobile Responsiveness:
      * Improved text scaling for smaller screens

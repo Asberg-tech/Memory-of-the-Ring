@@ -1,5 +1,27 @@
+/**
+ * Memory of the Ring - A fantasy-themed memory card game
+ * 
+ * This game was developed with assistance from AI (Claude) to create
+ * an engaging memory game experience with a fantasy theme.
+ * 
+ * The game features:
+ * - 16 cards (8 pairs) with fantasy character images
+ * - Card flip animations
+ * - Move counter and timer
+ * - Responsive design
+ * 
+ * @author Your Name
+ * @version 1.0.0
+ * @created 2024
+ */
+
 class MemoryGame {
+    /**
+     * Initializes a new instance of the Memory Game
+     * Sets up the game board and binds necessary event listeners
+     */
     constructor() {
+        // Game state variables
         this.cards = [];
         this.flippedCards = [];
         this.matchedPairs = 0;
@@ -8,7 +30,7 @@ class MemoryGame {
         this.timer = null;
         this.seconds = 0;
 
-        // DOM elements
+        // Cache DOM elements for better performance
         this.gameBoard = document.querySelector('.game-board');
         this.movesCount = document.getElementById('moves-count');
         this.timeElement = document.getElementById('time');
@@ -18,8 +40,12 @@ class MemoryGame {
         this.resetButton.addEventListener('click', () => this.resetGame());
     }
 
+    /**
+     * Initializes the game by creating and shuffling cards
+     * Sets up the initial game state
+     */
     initializeGame() {
-        // Card data with image paths
+        // Define card data with image paths
         const cardData = [
             { id: 1, imagePath: '../images/frodo.png' },
             { id: 2, imagePath: '../images/gandalf.png' },
@@ -31,12 +57,16 @@ class MemoryGame {
             { id: 8, imagePath: '../images/gimli.png' }
         ];
 
-        // Double the cards to create pairs
+        // Create pairs of cards and shuffle them
         this.cards = [...cardData, ...cardData];
         this.shuffleCards();
         this.renderCards();
     }
 
+    /**
+     * Shuffles the cards array using the Fisher-Yates algorithm
+     * Ensures random card placement each game
+     */
     shuffleCards() {
         for (let i = this.cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -44,6 +74,10 @@ class MemoryGame {
         }
     }
 
+    /**
+     * Renders the cards on the game board
+     * Creates card elements with front and back faces
+     */
     renderCards() {
         this.gameBoard.innerHTML = '';
         this.cards.forEach((card, index) => {
@@ -51,6 +85,7 @@ class MemoryGame {
             cardElement.classList.add('card');
             cardElement.dataset.index = index;
 
+            // Create card HTML structure
             cardElement.innerHTML = `
                 <div class="card-front">
                     <img src="${card.imagePath}" alt="card front">
@@ -58,12 +93,19 @@ class MemoryGame {
                 <div class="card-back"></div>
             `;
 
+            // Add click handler
             cardElement.addEventListener('click', () => this.flipCard(index));
             this.gameBoard.appendChild(cardElement);
         });
     }
 
+    /**
+     * Handles card flip logic
+     * Starts timer on first flip and checks for matches
+     * @param {number} index - The index of the clicked card
+     */
     flipCard(index) {
+        // Start timer on first card flip
         if (!this.gameStarted) {
             this.startTimer();
             this.gameStarted = true;
@@ -71,12 +113,13 @@ class MemoryGame {
 
         const card = this.gameBoard.children[index];
 
-        // Return if card is already flipped or matched
+        // Prevent flipping if card is already flipped or two cards are showing
         if (card.classList.contains('flipped') || this.flippedCards.length >= 2) return;
 
         card.classList.add('flipped');
         this.flippedCards.push({ index, id: this.cards[index].id });
 
+        // Check for match when two cards are flipped
         if (this.flippedCards.length === 2) {
             this.moves++;
             this.movesCount.textContent = this.moves;
@@ -84,6 +127,10 @@ class MemoryGame {
         }
     }
 
+    /**
+     * Checks if two flipped cards match
+     * Updates game state and handles card visibility
+     */
     checkMatch() {
         const [firstCard, secondCard] = this.flippedCards;
         const match = firstCard.id === secondCard.id;
@@ -92,10 +139,12 @@ class MemoryGame {
             this.matchedPairs++;
             this.flippedCards = [];
 
+            // Check for game completion
             if (this.matchedPairs === this.cards.length / 2) {
                 this.endGame();
             }
         } else {
+            // Flip cards back after delay if no match
             setTimeout(() => {
                 const firstCardElement = this.gameBoard.children[firstCard.index];
                 const secondCardElement = this.gameBoard.children[secondCard.index];
@@ -107,6 +156,10 @@ class MemoryGame {
         }
     }
 
+    /**
+     * Starts the game timer
+     * Updates display every second
+     */
     startTimer() {
         this.timer = setInterval(() => {
             this.seconds++;
@@ -116,6 +169,10 @@ class MemoryGame {
         }, 1000);
     }
 
+    /**
+     * Handles game completion
+     * Stops timer and shows completion message
+     */
     endGame() {
         clearInterval(this.timer);
         setTimeout(() => {
@@ -123,6 +180,10 @@ class MemoryGame {
         }, 500);
     }
 
+    /**
+     * Resets the game state
+     * Clears timer, moves, and rebuilds the board
+     */
     resetGame() {
         clearInterval(this.timer);
         this.flippedCards = [];
@@ -136,7 +197,7 @@ class MemoryGame {
     }
 }
 
-// Start the game when the page loads
+// Initialize game when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     const game = new MemoryGame();
     game.initializeGame();

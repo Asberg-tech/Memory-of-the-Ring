@@ -3,7 +3,33 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{framed}
+
 \geometry{a4paper, margin=1in}
+
+% Definiera färger för kodblock
+\definecolor{codebackground}{RGB}{40, 44, 52}
+\definecolor{codetext}{RGB}{171, 178, 191}
+
+% Skapa en anpassad miljö för kod
+\DefineVerbatimEnvironment{codebox}{Verbatim}{
+    frame=single,
+    framesep=2mm,
+    baselinestretch=1.2,
+    fontsize=\small,
+    commandchars=\\\{\},
+    formatcom=\color{codetext},
+    bgcolor=codebackground,
+    breaklines=true,
+    breakanywhere=true,
+    breaksymbol=⤶,
+    numbers=left,
+    numbersep=5pt,
+    xleftmargin=15pt
+}
 
 \title{\textbf{Gesällprov: Memory of the Ring}}
 \author{Niklas Åsberg}
@@ -41,39 +67,72 @@ Denna uppdelning säkerställde en tydlig separation av ansvar mellan olika kodd
 
 \subsection*{Utvecklingssteg}
 \begin{enumerate}
-    \item \textbf{Grundläggande HTML-struktur}: Implementerade spelplanen, titel, räknare och kontrollknappar. Vi valde att dynamiskt generera och hantera spelkorten med JavaScript istället för att hårdkoda dem i HTML. Detta gav större flexibilitet och möjlighet att enkelt ändra antalet kort i framtiden. Däremot lät vi bakgrunden vara statisk i HTML och CSS för att säkerställa att den laddades korrekt och förbättra prestandan.
-    \item \textbf{CSS-design}: Utvecklade ett responsivt och tematiskt spelgränssnitt med animerade kortvändningar. Jag valde att bryta ut färger och gradienter i en separat fil, \texttt{colors.css}, för att enkelt kunna ändra spelets färgtema och göra det mer flexibelt.
-    \item \textbf{JavaScript-funktionalitet}: Skapade spelets logik inklusive kortvändning, matchningslogik, tidtagning och vinsthantering.
-    \item \textbf{Bildhantering}: Från början använde jag bilder som var upphovsrättsskyddade, men insåg att detta kunde orsaka problem. För att undvika detta genererade jag istället bilder med hjälp av DALL·E 3, vilka efterliknar en fantasyvärld inspirerad av Lord of the Rings.
-    \item \textbf{Refaktorering med Klasser}: Initialt var korten representerade som enkla objekt, men jag insåg att det skulle vara bättre att använda klasser för att hantera kortens egenskaper och beteende på ett mer strukturerat sätt. Detta förbättrade kodens läsbarhet och underhållbarhet.
-    \item \textbf{Förbättring av Vinstskärm}: Ursprungligen visades bara en enkel alert med texten “Congratulations, you have won!”. För att göra upplevelsen mer engagerande lade jag istället till en vinstmodal i HTML:
+    \item \textbf{Initial Utveckling}:
     \begin{itemize}
-        \item En gratulationsbild
-        \item En titel med MedievalSharp-typsnittet
-        \item Spelstatistik (antal drag och tid)
-        \item En "Play Again"-knapp
+        \item Implementerade grundläggande spelmekanik med korthantering
+        \item Etablerade timer och move-counter funktionalitet
+        \item Skapade grundläggande HTML-struktur med spelplan, titel och kontroller
+        \item Valde att dynamiskt generera spelkorten med JavaScript för ökad flexibilitet
     \end{itemize}
-    
-    Dessutom uppdaterades CSS för att:
+
+    \item \textbf{Visuella Förbättringar}:
     \begin{itemize}
-        \item Skapa en centrerad overlay med mörk bakgrund
-        \item Designa en tematiskt passande container med gyllene ram
-        \item Matcha spelets färger och typsnitt
-        \item Implementera animationer och hover-effekter
-        \item Göra designen responsiv
+        \item Började med enkel lila bakgrund på korten
+        \item Utvecklade till tematisk kortdesign med fantasy-inspirerade bilder
+        \item Implementerade animationer för kortflipp och hover-effekter
+        \item Skapade responsiv design med CSS Grid och Flexbox
+        \item Utvecklade ett konsekvent färgtema med \texttt{colors.css}
     \end{itemize}
-    
-    Slutligen uppdaterades JavaScript för att:
+
+    \item \textbf{Kodstruktur och Organisation}:
     \begin{itemize}
-        \item Cacha de nya DOM-elementen
-        \item Lägga till en event-lyssnare för "Play Again"-knappen
-        \item Ersätta den gamla alerten med den nya vinstmodulen
-        \item Hantera visning och gömning av modalen
+        \item Startade med all kod i en fil för enkelhet
+        \item Försökte separera Card-klassen till egen modul
+        \item Återgick till single-file lösning på grund av CORS-begränsningar
+        \item Implementerade objektorienterad design med Card och MemoryGame klasser
+        \item Dokumenterade beslutsprocessen för framtida referens
     \end{itemize}
-    Vinstskärmen dyker nu upp med en mjuk fade-in-effekt när spelaren vinner och visar statistik, en gratulationsbild samt en knapp för att starta om spelet.
-    \item \textbf{Användarupplevelseförbättringar}: Implementerade animationer, hover-effekter och förbättrad kodstruktur för bättre spelupplevelse.
-    \item \textbf{Prestandaoptimering}: Lade till lazy loading för bilder och optimerade CSS-animationer för att minska onödig renderingsbelastning.
-    \item \textbf{Buggrättning och Finjustering}: Under testningen upptäcktes problem med hur korten vände sig vid snabba klick, vilket åtgärdades genom att lägga till en tidsfördröjning innan ett nytt klick kunde registreras.
+
+    \item \textbf{Bildhantering}:
+    \begin{itemize}
+        \item Genererade unika bilder med DALL·E 3 för att undvika upphovsrättsproblem
+        \item Optimerade bildstorlekar och laddningstider
+        \item Skapade konsekvent visuell stil över alla spelkort
+        \item Implementerade responsiv bildhantering
+    \end{itemize}
+
+    \item \textbf{Förbättring av Vinstskärm}:
+    \begin{itemize}
+        \item Ersatte basic JavaScript alert med en styled modal
+        \item Lade till gratulationsbild och tematisk typografi
+        \item Implementerade spelstatistik (drag och tid)
+        \item Skapade "Play Again"-funktionalitet
+        \item Designade responsiv layout med animationer
+    \end{itemize}
+
+    \item \textbf{Användarupplevelseförbättringar}:
+    \begin{itemize}
+        \item Implementerade mjuka övergångar och animationer
+        \item Lade till hover-effekter för bättre feedback
+        \item Förbättrade kortflipp-mekaniken
+        \item Optimerade prestanda för animationer
+    \end{itemize}
+
+    \item \textbf{Prestandaoptimering}:
+    \begin{itemize}
+        \item Implementerade lazy loading för bilder
+        \item Optimerade CSS-animationer
+        \item Förbättrade minneshantering
+        \item Säkerställde jämn prestanda på olika enheter
+    \end{itemize}
+
+    \item \textbf{Dokumentation och Kvalitetssäkring}:
+    \begin{itemize}
+        \item Implementerade omfattande JSDoc dokumentation
+        \item Skapade tydlig kodstruktur med väldefinierade klasser
+        \item Säkerställde konsekvent kodstil
+        \item Testade och åtgärdade buggar, särskilt kring kortvändningslogiken
+    \end{itemize}
 \end{enumerate}
 
 \begin{figure}[h]
@@ -84,20 +143,326 @@ Denna uppdelning säkerställde en tydlig separation av ansvar mellan olika kodd
 \end{figure}
 
 \section*{Funktion}
-Spelet fungerar genom att:
+Spelet är enkelt att starta och spela:
+
+\subsection*{Uppstart}
+För att starta spelet behöver användaren bara öppna \texttt{index.html} i en webbläsare. Ingen installation eller webbserver krävs, vilket gör spelet mycket tillgängligt. Vid start presenteras användaren med spelplanen som visar:
+\begin{itemize}
+    \item En titel "Memory of the Ring" i medeltida typsnitt
+    \item 16 nedvända kort arrangerade i ett 4x4 rutnät
+    \item En räknare för antal drag
+    \item En timer som startar vid första kortväljningen
+    \item En "New Game" knapp för att starta om spelet
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/start.png}
+    \caption{Startskärmen visar spelplanen med alla kort nedvända}
+    \label{fig:game_start}
+\end{figure}
+
+\subsection*{Spelmekanik}
+Spelet följer klassisk memory-mekanik med några moderna tillägg:
 \begin{enumerate}
-    \item Användaren klickar på ett kort, vilket vänds upp.
-    \item Ett andra kort väljs och jämförs med det första.
-    \item Om de matchar, förblir de vända, annars vänds de tillbaka.
-    \item Spelet räknar antal drag och tid.
-    \item När alla par är funna visas en vinstskärm med statistik.
+    \item Spelaren börjar genom att klicka på valfritt kort, vilket vänds upp och visar en fantasy-karaktär eller symbol.
+    \item Ett andra kort väljs och vänds upp. Systemet jämför nu de två korten:
+    \begin{itemize}
+        \item Om korten matchar förblir de uppvända
+        \item Om korten inte matchar vänds de automatiskt tillbaka efter en kort stund
+    \end{itemize}
+    \item För varje par av kort som vänds (oavsett om de matchar eller inte):
+    \begin{itemize}
+        \item Drag-räknaren ökar med ett
+        \item Tiden fortsätter att ticka
+    \end{itemize}
+    \item Spelet fortsätter tills alla par har hittats
 \end{enumerate}
 
 \begin{figure}[h]
     \centering
+    \includegraphics[width=0.8\textwidth]{images/play.png}
+    \caption{Spelet under pågående match, med några kort uppvända och matchade}
+    \label{fig:game_play}
+\end{figure}
+
+\subsection*{Vinsttillstånd}
+När spelaren har hittat alla par:
+\begin{itemize}
+    \item Timern stannar automatiskt
+    \item En animerad vinstskärm visas med:
+    \begin{itemize}
+        \item En gratulationsbild
+        \item Spelarens totala antal drag (t.ex. "Du vann på 24 drag")
+        \item Den totala speltiden (t.ex. "Tid: 01:45")
+        \item En "Play Again" knapp för att starta ett nytt spel
+    \end{itemize}
+    \item Spelaren kan välja att starta ett nytt spel, där korten blandas om i nya positioner
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
     \includegraphics[width=0.6\textwidth]{images/win.png}
-    \caption{Vinstskärmen}
+    \caption{Vinstskärmen visar spelarens resultat och möjlighet att spela igen}
     \label{fig:game_win}
 \end{figure}
+
+Denna speldesign uppmuntrar till återspelning genom att låta spelaren försöka förbättra sitt resultat genom att minska antalet drag eller tiden det tar att hitta alla par.
+
+\section*{Form}
+Koden är strukturerad enligt objektorienterade principer med två huvudklasser: \texttt{Card} och \texttt{MemoryGame}. Denna uppdelning möjliggör en tydlig separation av ansvar där varje klass hanterar sin specifika funktionalitet.
+
+\subsection*{Klassstruktur}
+\subsubsection*{Card-klassen}
+Hanterar enskilda korts egenskaper och beteende:
+
+\begin{codebox}
+class Card:
+    properties:
+        id          // Unikt ID för matchning av par
+        imagePath   // Sökväg till kortets bild
+        name        // Kortets namn/beskrivning
+        isFlipped   // Om kortet är vänt
+        isMatched   // Om kortet har matchats
+
+    methods:
+        constructor(id, imagePath, name)
+        createElement(index, flipCallback)
+\end{codebox}
+
+\subsubsection*{MemoryGame-klassen}
+Hanterar spellogiken och spelflödet:
+
+\begin{codebox}
+class MemoryGame:
+    properties:
+        cards[]           // Array med alla kort
+        flippedCards[]    // Array med vända kort
+        matchedPairs      // Antal hittade par
+        moves            // Antal drag
+        gameStarted      // Om spelet har börjat
+        timer            // Referens till timer
+        seconds          // Spelad tid
+
+    methods:
+        constructor()
+        initializeGame()
+        shuffleCards()
+        renderCards()
+        flipCard(index)
+        checkMatch()
+        startTimer()
+        showVictoryScreen()
+        endGame()
+        resetGame()
+\end{codebox}
+
+\subsection*{Centrala Kodfunktioner}
+\subsubsection*{Korthantering}
+Kortens vändningslogik implementeras genom CSS-transformationer och JavaScript-events:
+
+\begin{codebox}
+program flipCard
+flipCard_args(1) = kortIndex
+
+if kort_är_vänt(kortIndex) or antal_vända_kort() >= 2 then
+    return "nekad vändning"
+
+if första_draget() then
+    startTimer()
+
+vändKort(kortIndex)
+läggTillVäntKort(kortIndex)
+
+if antal_vända_kort() == 2 then
+    ökaAntalDrag()
+    kontrollera_match()
+
+return "kort vänt"
+\end{codebox}
+
+\subsubsection*{Matchningskontroll}
+Kontrollerar om två vända kort matchar:
+
+\begin{codebox}
+program checkMatch
+
+kort1 = hämta_vänt_kort(1)
+kort2 = hämta_vänt_kort(2)
+
+if kort1.id == kort2.id then
+    markera_matchade(kort1, kort2)
+    öka_antal_par()
+    if alla_par_hittade() then
+        visa_vinstskärm()
+else
+    vänta(1)
+    vänd_tillbaka(kort1, kort2)
+
+töm_vända_kort()
+return "matchkontroll klar"
+\end{codebox}
+
+\subsection*{Spelflöde}
+Det övergripande spelflödet:
+
+\begin{codebox}
+program startGame
+
+// Initiering
+spelinstans = skapa_ny_spelinstans()
+kortarray = generera_kort()
+blanda_kort(kortarray)
+rendera_spelplan(kortarray)
+
+// Huvudloop
+loop
+    if användar_klick() then
+        kortIndex = hämta_klickat_kort()
+        flipCard(kortIndex)
+        
+    if alla_par_hittade() then
+        exit
+
+    uppdatera_ui()
+
+// Spelavslut
+stoppa_timer()
+resultat = beräkna_slutresultat()
+visa_vinstskärm(resultat)
+
+return "spel avslutat"
+\end{codebox}
+
+\subsection*{Timer-hantering}
+Timer för speltidsräkning:
+
+\begin{codebox}
+program startTimer
+
+sekunder = 0
+timer_aktiv = true
+
+loop
+    if !timer_aktiv then
+        exit
+        
+    vänta(1)
+    sekunder = sekunder + 1
+    visa_tid(formatera_tid(sekunder))
+
+return "timer stoppad"
+
+program formatera_tid
+formatera_tid_args(1) = sekunder
+
+minuter = sekunder / 60
+återstående_sekunder = sekunder % 60
+
+return minuter + ":" + återstående_sekunder
+\end{codebox}
+
+\subsection*{Kortgenerering}
+Skapar och blandar spelkorten:
+
+\begin{codebox}
+program generera_kort
+
+kortlista = []
+karaktärer = ["frodo", "gandalf", "aragorn", "legolas", 
+              "sauron", "gollum", "ring", "gimli"]
+
+for i = 1 to längd(karaktärer) step 1
+    kort1() = skapa_kort(i, karaktärer(i))
+    kort2() = skapa_kort(i, karaktärer(i))
+    lägg_till(kortlista, kort1)
+    lägg_till(kortlista, kort2)
+
+return kortlista
+
+program blanda_kort
+blanda_kort_args(1) = kortlista
+
+for i = längd(kortlista) to 2 step -1
+    j = random(1, i)
+    byt_plats(kortlista(i), kortlista(j))
+
+return kortlista
+\end{codebox}
+
+Denna pseudokod följer de specificerade reglerna med naturligt språk, tydlig flödeshantering och korrekt variabelhantering. Koden är organiserad i distinkta program med tydliga in- och utargument.
+
+\subsection*{Responsiv Design}
+Spelets responsiva design implementeras genom CSS Grid och Flexbox:
+
+\begin{codebox}
+// Grundläggande layout
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+// Responsiv anpassning
+@media (max-width: 600px) {
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+\end{codebox}
+
+\subsection*{Prestandaoptimering}
+Koden inkluderar flera optimeringar för bättre prestanda:
+
+\begin{codebox}
+1. DOM-cachning:
+   - Spara referenser till ofta använda element
+   - Minimera DOM-sökningar
+
+2. Event-delegering:
+   - Använd en event-lyssnare för spelplanen
+   - Delegera events till individuella kort
+
+3. Animeringsoptimering:
+   - Använd CSS transforms för animationer
+   - Aktivera hardware-acceleration
+   - Begränsa antal samtidiga animationer
+\end{codebox}
+
+Denna kodstruktur möjliggör enkel underhållning och utbyggnad av spelet, samtidigt som den säkerställer god prestanda och användarvänlighet.
+
+\section*{AI-användning i Projektet}
+I utvecklingen av detta projekt har artificiell intelligens använts som ett stödjande verktyg på följande sätt:
+
+\subsection*{Bildgenerering}
+\begin{itemize}
+    \item DALL·E 3 användes för att generera unika fantasy-inspirerade bilder för spelkorten
+    \item Detta säkerställde att bildmaterialet var fritt från upphovsrättsproblem
+    \item Bilderna skapades med specifika instruktioner för att matcha spelets tema
+\end{itemize}
+
+\subsection*{Kodutveckling}
+\begin{itemize}
+    \item Claude (AI-assistent) användes som en pair-programming partner för att:
+    \begin{itemize}
+        \item Diskutera kodstruktur och arkitektoniska beslut
+        \item Få förslag på optimeringar och förbättringar
+        \item Identifiera potentiella problem och buggar
+    \end{itemize}
+    \item All kod granskades och validerades manuellt
+    \item AI-förslagen anpassades för att matcha projektets specifika behov
+\end{itemize}
+
+\subsection*{Dokumentation}
+\begin{itemize}
+    \item AI assisterade i att:
+    \begin{itemize}
+        \item Strukturera dokumentationen
+        \item Generera pseudokod för teknisk beskrivning
+        \item Förbättra läsbarheten i tekniska förklaringar
+    \end{itemize}
+    \item All dokumentation har granskats och verifierats för korrekthet
+\end{itemize}
+
+Det är viktigt att notera att AI har använts som ett kompletterande verktyg, där alla beslut och implementationer har granskats och godkänts manuellt. AI:n har fungerat som en katalysator för idéer och en kvalitetssäkrare, medan den kreativa och tekniska visionen har styrts av mänskligt omdöme.
 
 \end{document}

@@ -266,3 +266,39 @@ Next Steps
 
 Outcome
 This approach leads to a simple yet thematic project that showcases basic web development skills (HTML/CSS/JS), design considerations (style consistency, responsiveness), and creative adaptation of a fantasy setting. The recent visual improvements have significantly enhanced the user experience while maintaining the game's core functionality.
+
+Utvecklingsprocess och Iterationer
+
+1. Initial Utveckling
+   - Skapade grundläggande spelmekanik
+   - Implementerade grundläggande korthantering
+   - Etablerade timer och move-counter funktionalitet
+
+2. Visuella Förbättringar
+   - Började med enkel lila bakgrund på korten
+   - Utvecklade till tematisk kortdesign med fantasy-inspirerade bilder
+   - Implementerade animationer för kortflipp och hover-effekter
+
+3. Kodstruktur och Organisation
+   - Startade med all kod i en fil
+   - Försökte separera Card-klassen till egen modul
+   - Återgick till single-file lösning på grund av CORS-begränsningar
+   - Dokumenterade beslutsprocessen för framtida referens
+
+4. Användarupplevelse Iterationer
+   - Förbättrade från basic alert till styled victory modal
+   - Lade till congratulation.png för visuell feedback
+   - Implementerade MedievalSharp font för tematisk konsekvens
+   - Skapade responsiv design för olika skärmstorlekar
+
+5. Tekniska Överväganden
+   - Valde att köra utan webbserver för enkel utveckling
+   - Optimerade bildhantering och filstruktur
+   - Implementerade objektorienterad design med Card och MemoryGame klasser
+   - Säkerställde cross-browser kompatibilitet
+
+6. Dokumentation och Kodkvalitet
+   - Implementerade omfattande JSDoc dokumentation
+   - Skapade tydlig kodstruktur med väldefinierade klasser
+   - Dokumenterade utvecklingsprocessen i thought_process.md
+   - Säkerställde konsekvent kodstil och namngivning

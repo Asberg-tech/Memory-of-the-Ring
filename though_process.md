@@ -44,6 +44,10 @@ Development Process
    - Implemented responsive grid layout for cards
    - Created smooth card flip animations using CSS transforms
    - Added media queries for mobile responsiveness
+   - Enhanced visual atmosphere:
+     * Themed background image covering the entire viewport
+     * Fixed background attachment for smooth scrolling
+     * Proper image scaling and positioning for all screen sizes
    - Implemented custom card design:
      * Square aspect ratio for visual consistency
      * Enhanced corner rounding (15px radius)
@@ -59,6 +63,7 @@ Development Process
      * Box-shadow for depth
      * Mobile-first responsive design
      * Background image handling
+     * Fixed background attachments
 
 4. Game Logic (JavaScript)
    - Implemented core game mechanics using a class-based approach

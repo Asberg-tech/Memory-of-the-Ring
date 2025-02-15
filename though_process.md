@@ -183,6 +183,25 @@ Development Process
        - Maintained transparency about tools used
        - Professional documentation standards
 
+   - Code Organization Decisions:
+     * Considered modular approach:
+       - Initially planned to separate Card class into its own file
+       - Would have used ES6 modules (import/export)
+       - More maintainable in larger applications
+     * Chose single-file implementation:
+       - Keeps Card and MemoryGame classes together
+       - Avoids CORS (Cross-Origin Resource Sharing) issues
+       - Enables direct file system browsing
+     * Technical considerations:
+       - Modular approach would require:
+         * Setting up a local web server
+         * Using http/https protocol instead of file://
+         * Proper CORS configuration
+       - Current approach benefits:
+         * Simpler local development
+         * Easy testing (just open index.html)
+         * No server setup needed
+
    - Object-Oriented Improvements:
      * Implemented Card class structure:
        - From: Simple object literals for cards

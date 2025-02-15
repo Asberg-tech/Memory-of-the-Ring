@@ -10,13 +10,21 @@
  * - Move counter and timer
  * - Responsive design
  * 
- * Note: Initially attempted to break out the Card class into a separate module,
- * but reverted back to a single file to support direct file system browsing
- * without requiring a web server (which would be needed for ES6 modules).
+ * Implementation Note:
+ * Both Card and MemoryGame classes are kept in the same file for simplicity
+ * and to avoid CORS (Cross-Origin Resource Sharing) issues when running directly
+ * from the file system. While it would be more modular to split these into
+ * separate files using ES6 modules (import/export), this would require:
+ * 1. Setting up a local web server
+ * 2. Using the http/https protocol instead of file://
+ * 3. Proper CORS configuration
  * 
- * @author Your Name
+ * For easy local development and testing, keeping everything in one file
+ * allows the game to run by simply opening index.html in a browser.
+ * 
+ * @author Niklas Åsberg
  * @version 1.0.0
- * @created 2024
+ * @created 2025-
  */
 
 /**

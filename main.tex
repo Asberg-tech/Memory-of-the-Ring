@@ -396,18 +396,16 @@ Denna pseudokod följer de specificerade reglerna med naturligt språk, tydlig f
 Spelets responsiva design implementeras genom CSS Grid och Flexbox:
 
 \begin{codebox}
-// Grundläggande layout
-.game-board {
+.game-board \{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-}
+\}
 
-// Responsiv anpassning
-@media (max-width: 600px) {
-    .game-board {
+@media (max-width: 600px) \{
+    .game-board \{
         grid-template-columns: repeat(3, 1fr);
-    }
-}
+    \}
+\}
 \end{codebox}
 
 \subsection*{Prestandaoptimering}

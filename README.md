@@ -1,5 +1,7 @@
 # Memory of the Ring
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/Asberg-tech/Memory-of-the-Ring)
+
 A fantasy-themed memory card game built with HTML, CSS, and JavaScript. Match pairs of iconic characters and artifacts to test your memory in this engaging and visually appealing game.
 
 ## Features

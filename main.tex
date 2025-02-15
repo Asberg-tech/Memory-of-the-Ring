@@ -1,0 +1,103 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{Gesällprov: Memory of the Ring}}
+\author{Niklas Åsberg}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Sammanfattning}
+Memory of the Ring är ett minnesspel inspirerat av fantasyvärlden där spelaren matchar kortpar med kända karaktärer och symboler. Spelet är utvecklat i HTML, CSS och JavaScript och har funktioner såsom kortvändning, matchningslogik, drag- och tidräknare samt en vinstskärm. Layouten är responsiv och temat är anpassat till den mytiska atmosfären.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/start.png}
+    \caption{Spelets startskärm}
+    \label{fig:game_start}
+\end{figure}
+
+\section*{Framtagande}
+Utvecklingsprocessen bestod av flera steg som innefattade planering, design och implementering.
+
+\subsection*{Idé och Koncept}
+Spelet bygger på ett minnesspel där spelaren matchar bilder av ikoniska karaktärer och föremål från en fantasyvärld. Målet är att göra spelet estetiskt tilltalande och intuitivt att spela.
+
+\subsection*{Struktur och Planering}
+Projektet strukturerades för att hålla koden organiserad och underhållbar:
+\begin{itemize}
+    \item \textbf{pages/} - HTML-filer
+    \item \textbf{styles/} - CSS-filer
+    \item \textbf{scripts/} - JavaScript-kod
+    \item \textbf{images/} - Spelgrafik
+\end{itemize}
+Denna uppdelning säkerställde en tydlig separation av ansvar mellan olika koddelar.
+
+\subsection*{Utvecklingssteg}
+\begin{enumerate}
+    \item \textbf{Grundläggande HTML-struktur}: Implementerade spelplanen, titel, räknare och kontrollknappar. Vi valde att dynamiskt generera och hantera spelkorten med JavaScript istället för att hårdkoda dem i HTML. Detta gav större flexibilitet och möjlighet att enkelt ändra antalet kort i framtiden. Däremot lät vi bakgrunden vara statisk i HTML och CSS för att säkerställa att den laddades korrekt och förbättra prestandan.
+    \item \textbf{CSS-design}: Utvecklade ett responsivt och tematiskt spelgränssnitt med animerade kortvändningar. Jag valde att bryta ut färger och gradienter i en separat fil, \texttt{colors.css}, för att enkelt kunna ändra spelets färgtema och göra det mer flexibelt.
+    \item \textbf{JavaScript-funktionalitet}: Skapade spelets logik inklusive kortvändning, matchningslogik, tidtagning och vinsthantering.
+    \item \textbf{Bildhantering}: Från början använde jag bilder som var upphovsrättsskyddade, men insåg att detta kunde orsaka problem. För att undvika detta genererade jag istället bilder med hjälp av DALL·E 3, vilka efterliknar en fantasyvärld inspirerad av Lord of the Rings.
+    \item \textbf{Refaktorering med Klasser}: Initialt var korten representerade som enkla objekt, men jag insåg att det skulle vara bättre att använda klasser för att hantera kortens egenskaper och beteende på ett mer strukturerat sätt. Detta förbättrade kodens läsbarhet och underhållbarhet.
+    \item \textbf{Förbättring av Vinstskärm}: Ursprungligen visades bara en enkel alert med texten “Congratulations, you have won!”. För att göra upplevelsen mer engagerande lade jag istället till en vinstmodal i HTML:
+    \begin{itemize}
+        \item En gratulationsbild
+        \item En titel med MedievalSharp-typsnittet
+        \item Spelstatistik (antal drag och tid)
+        \item En "Play Again"-knapp
+    \end{itemize}
+    
+    Dessutom uppdaterades CSS för att:
+    \begin{itemize}
+        \item Skapa en centrerad overlay med mörk bakgrund
+        \item Designa en tematiskt passande container med gyllene ram
+        \item Matcha spelets färger och typsnitt
+        \item Implementera animationer och hover-effekter
+        \item Göra designen responsiv
+    \end{itemize}
+    
+    Slutligen uppdaterades JavaScript för att:
+    \begin{itemize}
+        \item Cacha de nya DOM-elementen
+        \item Lägga till en event-lyssnare för "Play Again"-knappen
+        \item Ersätta den gamla alerten med den nya vinstmodulen
+        \item Hantera visning och gömning av modalen
+    \end{itemize}
+    Vinstskärmen dyker nu upp med en mjuk fade-in-effekt när spelaren vinner och visar statistik, en gratulationsbild samt en knapp för att starta om spelet.
+    \item \textbf{Användarupplevelseförbättringar}: Implementerade animationer, hover-effekter och förbättrad kodstruktur för bättre spelupplevelse.
+    \item \textbf{Prestandaoptimering}: Lade till lazy loading för bilder och optimerade CSS-animationer för att minska onödig renderingsbelastning.
+    \item \textbf{Buggrättning och Finjustering}: Under testningen upptäcktes problem med hur korten vände sig vid snabba klick, vilket åtgärdades genom att lägga till en tidsfördröjning innan ett nytt klick kunde registreras.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/play.png}
+    \caption{Spelet under kortvändning}
+    \label{fig:game_play}
+\end{figure}
+
+\section*{Funktion}
+Spelet fungerar genom att:
+\begin{enumerate}
+    \item Användaren klickar på ett kort, vilket vänds upp.
+    \item Ett andra kort väljs och jämförs med det första.
+    \item Om de matchar, förblir de vända, annars vänds de tillbaka.
+    \item Spelet räknar antal drag och tid.
+    \item När alla par är funna visas en vinstskärm med statistik.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/win.png}
+    \caption{Vinstskärmen}
+    \label{fig:game_win}
+\end{figure}
+
+\end{document}
